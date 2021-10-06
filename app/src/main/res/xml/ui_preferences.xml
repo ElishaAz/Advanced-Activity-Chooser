@@ -1,0 +1,38 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/main_dialog_header">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/k_dialog_show_type_b"
+            android:title="@string/dialog_show_type_name" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/k_dialog_show_data_b"
+            android:title="@string/dialog_show_data_name" />
+        <!--        <EditTextPreference-->
+        <!--            android:key="@string/k_dialog_columns_i"-->
+        <!--            android:selectAllOnFocus="true"-->
+        <!--            android:singleLine="true"-->
+        <!--            android:title="@string/dialog_columns_name"-->
+        <!--            app:defaultValue="4"-->
+        <!--            app:useSimpleSummaryProvider="true" />-->
+        <SeekBarPreference
+            android:max="10"
+            app:defaultValue="4"
+            app:key="@string/k_dialog_columns_i"
+            app:min="1"
+            app:seekBarIncrement="1"
+            app:showSeekBarValue="true"
+            app:title="@string/dialog_columns_name" />
+
+        <SeekBarPreference
+            android:max="100"
+            app:defaultValue="40"
+            app:key="@string/k_dialog_area_i"
+            app:min="10"
+            app:seekBarIncrement="10"
+            app:showSeekBarValue="true"
+            app:title="@string/dialog_area_name" />
+    </PreferenceCategory>
+</PreferenceScreen>

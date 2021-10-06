@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dialog.DialogActivity">
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/background"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:srcCompat="@drawable/ic_drawer_background" />-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+
+        android:orientation="vertical"
+        app:behavior_hideable="false"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:background="@drawable/rounded_dialog">
+
+        <ImageView
+            android:id="@+id/drawer_handle"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:padding="13dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_drawer_handle" />
+
+        <TextView
+            android:id="@+id/intent_type_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Open With"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/drawer_handle" />
+
+        <TextView
+            android:id="@+id/intent_data_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Choose an app to continue"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/intent_type_text" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/intent_data_text" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <Button
+                android:id="@+id/open_as_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Open As"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

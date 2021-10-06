@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="k_dialog_columns_i" translatable="false">d_columns</string>
+    <string name="k_dialog_show_type_b" translatable="false">d_show_type</string>
+    <string name="k_dialog_show_data_b" translatable="false">d_show_data</string>
+    <string name="k_dialog_area_i">d_area</string>
+
+    <string name="k_filter_enable_b" translatable="false">f_enable</string>
+    <string name="k_filter_map_m" translatable="false">f_map</string>
+</resources>

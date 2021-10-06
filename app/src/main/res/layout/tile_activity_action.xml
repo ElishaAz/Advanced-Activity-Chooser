@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:background="@drawable/button_ripple"
+    android:clickable="true"
+    android:clipToPadding="false"
+    android:focusable="true">
+    <!--    android:elevation="2dp"-->
+    <!--    android:stateListAnimator="@animator/button_elevation_animator">-->
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:mipmap/sym_def_app_icon" />
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="18sp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
