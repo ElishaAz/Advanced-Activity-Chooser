@@ -1,0 +1,2 @@
+Android builtin activity chooser (the share menu, and the open-with option in builtin Files) source code is located at:
+https://cs.android.com/android/platform/superproject/+/master:frameworks/base/core/java/com/android/internal/app/ChooserActivity.java
