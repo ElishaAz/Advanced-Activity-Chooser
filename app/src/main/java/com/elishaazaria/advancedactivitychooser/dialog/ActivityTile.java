@@ -13,7 +13,8 @@ public class ActivityTile {
     public final Drawable icon;
     public final ResolveInfo info;
 
-    protected OnClickListener onClick;
+    OnClickListener onClick;
+    OnLongClickListener onLongClick;
 
     public ActivityTile(CharSequence label, Drawable icon, ResolveInfo info) {
         this.label = label;
@@ -32,8 +33,16 @@ public class ActivityTile {
         this.onClick = l;
     }
 
+    public void setOnLongClickListener(OnLongClickListener l) {
+        this.onLongClick = l;
+    }
+
     public interface OnClickListener {
         void onClick(ActivityTile ab);
+    }
+
+    public interface OnLongClickListener {
+        boolean onLongClick(ActivityTile ab);
     }
 
     @Override

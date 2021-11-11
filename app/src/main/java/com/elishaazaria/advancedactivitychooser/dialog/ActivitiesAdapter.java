@@ -78,12 +78,8 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
             labelView.setText(data.label);
 
             root.setOnClickListener(v -> data.onClick.onClick(data));
+            root.setOnLongClickListener(v -> data.onLongClick.onLongClick(data));
         }
-    }
-
-    // convenience method for getting data at click position
-    ActivityTile getItem(int id) {
-        return mData[id];
     }
 }
 
