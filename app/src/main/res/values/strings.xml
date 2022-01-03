@@ -7,21 +7,22 @@
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="title_settings_ui">UI Settings</string>
     <string name="main_dialog_header">Main Dialog</string>
-    <string name="dialog_show_type_name">Show intent type</string>
-    <string name="dialog_show_data_name">Show intent data</string>
+    <string name="dialog_title_pref_name">Dialog Title</string>
+    <string name="dialog_show_scheme_name">Show Intent scheme</string>
+    <string name="dialog_show_type_name">Show Intent type</string>
+    <string name="dialog_show_data_name">Show Intent data</string>
+    <string name="dialog_show_action_name">Show Intent action</string>
     <string name="dialog_columns_name">Items per row</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="dialog_area_name">Window size (%)</string>
+    <string name="ac_title">Open Using</string>
+    <string name="ac_open_as">Open As</string>
+
+    <string name="dialog_scheme_name" translatable="false">Intent Scheme</string>
+    <string name="dialog_mime_type_name" translatable="false">MIME Type</string>
+    <string name="dialog_data_name" translatable="false">Intent Data</string>
+    <string name="dialog_action_name" translatable="false">Intent Action</string>
 </resources>

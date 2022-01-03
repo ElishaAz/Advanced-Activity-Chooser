@@ -23,10 +23,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
 
+        android:background="@drawable/rounded_dialog"
         android:orientation="vertical"
         app:behavior_hideable="false"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        android:background="@drawable/rounded_dialog">
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <ImageView
             android:id="@+id/drawer_handle"
@@ -39,12 +39,12 @@
             app:srcCompat="@drawable/ic_drawer_handle" />
 
         <TextView
-            android:id="@+id/intent_type_text"
+            android:id="@+id/dialog_title_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="Open With"
+            android:text="@string/ac_title"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -52,30 +52,82 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/drawer_handle" />
 
+        <LinearLayout
+            android:id="@+id/linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:isScrollContainer="false"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_title_text">
+
+            <TextView
+                android:id="@+id/intent_scheme_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/divider2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_title_text" />
+
+            <TextView
+                android:id="@+id/intent_mime_type_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="text/plain"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/divider2"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_title_text" />
+        </LinearLayout>
+
         <TextView
             android:id="@+id/intent_data_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:hint="content://com.android.example:data"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="Choose an app to continue"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/intent_type_text" />
+            app:layout_constraintTop_toBottomOf="@+id/linear_layout" />
+
+        <TextView
+            android:id="@+id/intent_action_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="com.android.FILE"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/intent_data_text" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="5dp"
             android:padding="5dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/intent_data_text" />
+            app:layout_constraintTop_toBottomOf="@+id/intent_action_text" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottom_bar"
@@ -89,7 +141,7 @@
                 android:id="@+id/open_as_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Open As"
+                android:text="@string/ac_open_as"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,9 +8,10 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 
 import com.elishaazaria.advancedactivitychooser.R;
 import com.elishaazaria.advancedactivitychooser.openas.OpenAsWindow;
+import com.elishaazaria.advancedactivitychooser.tools.MyPreferencesManager;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -34,14 +36,12 @@ import com.yevdo.jwildcard.JWildcard;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class DialogActivity extends AppCompatActivity {
-
-    private int windowAreaPercent;
-    private int itemsPerRow;
-    private boolean filterIntents;
-    private boolean showIntentType;
-    private boolean showIntentData;
+    private static final String TAG = "DialogActivity";
+    private MyPreferencesManager preferences;
+    private ClipboardManager clipboard;
 
     private Intent intent;
     private Intent base;
@@ -55,8 +55,12 @@ public class DialogActivity extends AppCompatActivity {
     private ConstraintLayout constraintLayout;
     private RecyclerView recyclerView;
 
+    private TextView intentScheme;
     private TextView intentType;
     private TextView intentData;
+    private TextView intentAction;
+
+    private TextView titleText;
 
     private Button openAs;
 
@@ -65,24 +69,9 @@ public class DialogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dialog);
 
-        coordinatorLayout = findViewById(R.id.root);
+        setupConstants();
 
-        constraintLayout = findViewById(R.id.constraint_layout);
-
-        recyclerView = findViewById(R.id.recycler_view);
-
-        intentType = findViewById(R.id.intent_type_text);
-        intentData = findViewById(R.id.intent_data_text);
-
-        openAs = findViewById(R.id.open_as_button);
-
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        height = displayMetrics.heightPixels;
-        width = displayMetrics.widthPixels;
-
-        loadPreferences();
+        preferences = new MyPreferencesManager(this);
 
         setGravity();
 
@@ -98,38 +87,37 @@ public class DialogActivity extends AppCompatActivity {
 
         setUpBottomSheet();
 
-        if (showIntentType && base.getType() != null) {
-            intentType.setText(base.getType());
-        }
-        if (showIntentData && base.getData() != null) {
-            intentData.setText(base.getData().toString());
-        }
+        setUpUI();
 
         openAs.setOnClickListener(v -> openOpenAs(base));
     }
 
-    private void setUpIntent() {
-        intent = getIntent();
+    private void setupConstants() {
+        coordinatorLayout = findViewById(R.id.root);
 
-        base = new Intent(intent);//intent.getParcelableExtra(Intent.EXTRA_INTENT);
+        constraintLayout = findViewById(R.id.constraint_layout);
 
-        base.setPackage(null);
-        base.setComponent(null);
-    }
+        recyclerView = findViewById(R.id.recycler_view);
 
-    private void loadPreferences() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        windowAreaPercent = sharedPreferences.getInt(getString(R.string.k_dialog_area_i), 40);
-        itemsPerRow = sharedPreferences.getInt(getString(R.string.k_dialog_columns_i), 4);
-        filterIntents = sharedPreferences.getBoolean(getString(R.string.k_filter_enable_b), false);
+        intentScheme = findViewById(R.id.intent_scheme_text);
+        intentType = findViewById(R.id.intent_mime_type_text);
+        intentData = findViewById(R.id.intent_data_text);
+        intentAction = findViewById(R.id.intent_action_text);
 
-        showIntentType = sharedPreferences.getBoolean(getString(R.string.k_dialog_show_type_b), true);
-        showIntentData = sharedPreferences.getBoolean(getString(R.string.k_dialog_show_data_b), false);
+        openAs = findViewById(R.id.open_as_button);
 
+        titleText = findViewById(R.id.dialog_title_text);
+
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        height = displayMetrics.heightPixels;
+        width = displayMetrics.widthPixels;
+
+        clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
     }
 
     private void setGravity() {
-
         setTitle("");
 
         Window window = getWindow();
@@ -142,17 +130,31 @@ public class DialogActivity extends AppCompatActivity {
         window.setAttributes(wlp);
     }
 
-    private void openOpenAs(Intent original) {
-//        Toast.makeText(this, "Open As!", Toast.LENGTH_SHORT).show();
-        OpenAsWindow window = new OpenAsWindow(original);
-        window.showPopupWindow(this, openAs, (category, type) -> {
-            // TODO:
-        });
+    private void setUpIntent() {
+        intent = getIntent();
+
+        base = new Intent(intent);//intent.getParcelableExtra(Intent.EXTRA_INTENT);
+
+        base.setPackage(null);
+        base.setComponent(null);
+    }
+
+    private void createButtonsUI(List<ActivityTile> activityButtons) {
+        layoutManager = new CustomGridLayoutManager(this, preferences.getItemsPerRow());
+        layoutManager.setScrollEnabled(false);
+
+        recyclerView.setLayoutManager(layoutManager);
+
+        int size = width / preferences.getItemsPerRow();
+
+        ActivitiesAdapter adapter = new ActivitiesAdapter(this, size, activityButtons.toArray(new ActivityTile[]{}));
+        recyclerView.setAdapter(adapter);
+
     }
 
     private void setUpBottomSheet() {
         BottomSheetBehavior<ConstraintLayout> bottomSheetBehavior = BottomSheetBehavior.from(constraintLayout);
-        bottomSheetBehavior.setPeekHeight((int) (height * (windowAreaPercent / 100.0)));
+        bottomSheetBehavior.setPeekHeight((int) (height * (preferences.getWindowAreaPercent() / 100.0)));
 
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -170,20 +172,47 @@ public class DialogActivity extends AppCompatActivity {
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                // do stuff during the actual drag event for example
-                // animating a background color change based on the offset
-
-                // or for example hidding or showing a fab
-//                if (slideOffset > 0.2) {
-//                    if (fab.isShown()) {
-//                        fab.hide();
-//                    }
-//                } else if (slideOffset < 0.15) {
-//                    if (!fab.isShown()) {
-//                        fab.show();
-//                    }
-//                }
             }
+        });
+    }
+
+    private void setUpUI() {
+        String title = preferences.getTitle();
+
+        if (title.trim().isEmpty()) {
+            titleText.setVisibility(View.GONE);
+        } else if (title.equals("default")) {
+            titleText.setText(R.string.ac_title);
+        } else {
+            titleText.setText(title);
+        }
+
+        setUpDataText(intentScheme, preferences.isShowIntentScheme(), base.getScheme(), R.string.dialog_scheme_name);
+        setUpDataText(intentType, preferences.isShowIntentType(), base.getType(), R.string.dialog_mime_type_name);
+        setUpDataText(intentData, preferences.isShowIntentData(), base.getData() == null ? null : base.getData().toString(), R.string.dialog_data_name);
+        setUpDataText(intentAction, preferences.isShowIntentAction(), base.getAction(), R.string.dialog_action_name);
+    }
+
+    private void setUpDataText(TextView textView, boolean showPref, String data, int nameRes) {
+        if (showPref && data != null) {
+            textView.setText(data);
+        } else {
+            textView.setVisibility(View.GONE);
+        }
+        textView.setOnLongClickListener(v -> {
+            String name = getString(nameRes);
+            ClipData clip = android.content.ClipData.newPlainText(name, data);
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(this, name + " copied to clipboard", Toast.LENGTH_SHORT).show();
+            return true;
+        });
+    }
+
+    private void openOpenAs(Intent original) {
+//        Toast.makeText(this, "Open As!", Toast.LENGTH_SHORT).show();
+        OpenAsWindow window = new OpenAsWindow(original);
+        window.showPopupWindow(this, openAs, (category, type) -> {
+            // TODO:
         });
     }
 
@@ -203,7 +232,7 @@ public class DialogActivity extends AppCompatActivity {
                     filter = true;
                 }
 
-                if (filterIntents)
+                if (preferences.isFilterIntents())
                     for (String pattern : getFilterPatterns(base.getType())) {
                         if (JWildcard.matches(pattern, info.activityInfo.packageName)) {
                             filter = true;
@@ -262,24 +291,6 @@ public class DialogActivity extends AppCompatActivity {
             }
         }
         return patternList;
-    }
-
-    private void createButtonsUI(List<ActivityTile> activityButtons) {
-        layoutManager = new CustomGridLayoutManager(this, itemsPerRow);
-        layoutManager.setScrollEnabled(false);
-//        recyclerView.setNestedScrollingEnabled(false);
-
-//        GridLayoutManager.LayoutParams lp = layoutManager.
-//        layoutManager.layoutParams
-
-//        layoutManager.setMeasuredDimension();
-        recyclerView.setLayoutManager(layoutManager);
-
-        int size = width / itemsPerRow;
-
-        ActivitiesAdapter adapter = new ActivitiesAdapter(this, size, activityButtons.toArray(new ActivityTile[]{}));
-        recyclerView.setAdapter(adapter);
-
     }
 
     public void onClick(ActivityTile ab) {

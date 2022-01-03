@@ -2,6 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="@string/main_dialog_header">
+        <EditTextPreference
+            android:defaultValue="default"
+            android:key="@string/k_dialog_title_s"
+            android:title="@string/dialog_title_pref_name"
+            app:useSimpleSummaryProvider="true" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/k_dialog_show_scheme_b"
+            android:title="@string/dialog_show_scheme_name" />
         <SwitchPreference
             android:defaultValue="true"
             android:key="@string/k_dialog_show_type_b"
@@ -10,6 +19,10 @@
             android:defaultValue="false"
             android:key="@string/k_dialog_show_data_b"
             android:title="@string/dialog_show_data_name" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/k_dialog_show_action_b"
+            android:title="@string/dialog_show_action_name" />
         <!--        <EditTextPreference-->
         <!--            android:key="@string/k_dialog_columns_i"-->
         <!--            android:selectAllOnFocus="true"-->
