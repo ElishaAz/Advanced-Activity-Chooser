@@ -92,6 +92,12 @@ public class DialogActivity extends AppCompatActivity {
         openAs.setOnClickListener(v -> openOpenAs(base));
     }
 
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+        finishAndRemoveTask();
+    }
+
     private void setupConstants() {
         coordinatorLayout = findViewById(R.id.root);
 

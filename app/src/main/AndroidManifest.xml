@@ -27,11 +27,17 @@
 
         <activity
             android:name=".dialog.DialogActivity"
+            android:excludeFromRecents="true"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
-            android:theme="@style/Theme.AdvancedActivityChooser.Dialog">
+            android:theme="@style/Theme.AdvancedActivityChooser.Dialog" />
+
+        <activity-alias
+            android:name="files"
+            android:exported="true"
+            android:targetActivity=".dialog.DialogActivity">
 
             <!-- Files -->
             <intent-filter> <!-- Any MIME type -->
@@ -55,6 +61,11 @@
                 <data android:scheme="file" />
                 <data android:host="*" />
             </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="web_browser"
+            android:targetActivity=".dialog.DialogActivity">
 
             <!-- Links -->
             <!--            <intent-filter> -->
@@ -81,23 +92,31 @@
                 <data android:scheme="http" />
                 <data android:scheme="https" />
             </intent-filter>
+        </activity-alias>
 
-            <!--            <intent-filter> &lt;!&ndash; Direct links &ndash;&gt;-->
-            <!--                <action android:name="android.intent.action.VIEW" />-->
+        <activity-alias
+            android:name="web_links"
+            android:enabled="false"
+            android:exported="true"
+            android:targetActivity=".dialog.DialogActivity">
 
-            <!--                <category android:name="android.intent.category.DEFAULT" />-->
-            <!--                <category android:name="android.intent.category.BROWSABLE" />-->
+            <intent-filter> <!-- Direct links -->
+                <action android:name="android.intent.action.VIEW" />
 
-            <!--                <data-->
-            <!--                    android:host="*"-->
-            <!--                    android:pathPattern=".*"-->
-            <!--                    android:scheme="https" />-->
-            <!--                <data-->
-            <!--                    android:host="*"-->
-            <!--                    android:pathPattern=".*"-->
-            <!--                    android:scheme="http" />-->
-            <!--            </intent-filter>-->
-        </activity>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="*"
+                    android:pathPattern=".*"
+                    android:scheme="https" />
+                <data
+                    android:host="*"
+                    android:pathPattern=".*"
+                    android:scheme="http" />
+            </intent-filter>
+        </activity-alias>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
