@@ -29,7 +29,6 @@
             android:excludeFromRecents="true"
             android:exported="true"
             android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name"
             android:theme="@style/Theme.AdvancedActivityChooser.Dialog" />
 
         <activity-alias
@@ -63,7 +62,8 @@
 
         <activity-alias
             android:name="web_browser"
-            android:targetActivity=".dialog.DialogActivity">
+            android:targetActivity=".dialog.DialogActivity"
+            android:exported="true">
 
             <!-- Links -->
             <!--            <intent-filter> -->
