@@ -19,8 +19,9 @@
     <!-- TODO: set up backup -->
     <application
         android:allowBackup="false"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AdvancedActivityChooser">
 
@@ -28,7 +29,8 @@
             android:name=".dialog.DialogActivity"
             android:excludeFromRecents="true"
             android:exported="true"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
             android:theme="@style/Theme.AdvancedActivityChooser.Dialog" />
 
         <activity-alias
@@ -62,8 +64,8 @@
 
         <activity-alias
             android:name="web_browser"
-            android:targetActivity=".dialog.DialogActivity"
-            android:exported="true">
+            android:exported="true"
+            android:targetActivity=".dialog.DialogActivity">
 
             <!-- Links -->
             <!--            <intent-filter> -->
