@@ -33,6 +33,8 @@
         <entry key="app/src/main/res/layout/window_open_as.xml" value="0.2015625" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="app/src/main/res/xml/data_extraction_rules.xml" value="0.5357142857142857" />
+        <entry key="app/src/main/res/xml/full_backup_content.xml" value="0.1" />
         <entry key="app/src/main/res/xml/ui_preferences.xml" value="0.2" />
       </map>
     </option>
