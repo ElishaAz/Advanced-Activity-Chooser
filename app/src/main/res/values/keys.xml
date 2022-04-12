@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="k_dialog_columns_i" translatable="false">d_columns</string>
+    <!--
+    n - none (used as an id in preferences)
+    b - boolean
+    i - int
+    d - double
+    s - string
+    m - a HashMap serialized as JSON
+    -->
 
-    <string name="k_dialog_show_scheme_b" translatable="false">d_show_scheme</string>
-    <string name="k_dialog_show_type_b" translatable="false">d_show_type</string>
-    <string name="k_dialog_show_data_b" translatable="false">d_show_data</string>
-    <string name="k_dialog_show_action_b" translatable="false">d_show_action</string>
-    <string name="k_dialog_area_i">d_area</string>
-    <string name="k_dialog_title_s">d_title</string>
+    <string name="k_none" translatable="false">pref_static_field_key</string>
 
-    <string name="k_filter_enable_b" translatable="false">f_enable</string>
-    <string name="k_filter_map_m" translatable="false">f_map</string>
+    <string name="k_dialog_columns_i" translatable="false">i_dialog_columns</string>
+
+    <string name="k_dialog_show_scheme_b" translatable="false">b_dialog_show_scheme</string>
+    <string name="k_dialog_show_type_b" translatable="false">b_dialog_show_type</string>
+    <string name="k_dialog_show_data_b" translatable="false">b_dialog_show_data</string>
+    <string name="k_dialog_show_action_b" translatable="false">b_dialog_show_action</string>
+    <string name="k_dialog_area_i" translatable="false">i_dialog_area</string>
+    <string name="k_dialog_title_s" translatable="false">s_dialog_title</string>
+
+    <string name="k_filter_enable_b" translatable="false">b_filter_enable</string>
+    <string name="k_filter_map_m" translatable="false">m_filter_map</string>
+
+    <string name="k_alias_category_n" translatable="false">n_alias_category</string>
+    <string name="k_alias_show_advanced_b" translatable="false">b_alias_show_advanced</string>
+
+    <string name="k_alias_files_b" translatable="false">b_alias_files</string>
+    <string name="k_alias_web_browser_b" translatable="false">b_alias_web_browser</string>
+    <string name="k_alias_web_links_b" translatable="false">b_alias_web_links</string>
+    <string name="k_alias_scheme_intents_b" translatable="false">b_alias_scheme_intents</string>
+    <string name="k_alias_open_camera_b" translatable="false">b_alias_open_camera</string>
 </resources>

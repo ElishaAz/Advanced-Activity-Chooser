@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../.local/Programs/Android-SDK/platforms/android-32/data/res/layout/preference_category.xml" value="0.1" />
         <entry key="..\:/Users/Elisha Azaria/Programming/Android/AdvancedActivityChooser/app/src/main/res/drawable-v24/button_ripple.xml" value="0.1" />
         <entry key="..\:/Users/Elisha Azaria/Programming/Android/AdvancedActivityChooser/app/src/main/res/drawable/button_ripple.xml" value="0.1" />
         <entry key="..\:/Users/Elisha Azaria/Programming/Android/AdvancedActivityChooser/app/src/main/res/drawable/ic_corner_left.xml" value="0.22447916666666667" />
@@ -21,7 +22,9 @@
         <entry key="..\:/Users/Elisha Azaria/Programming/Android/AdvancedActivityChooser/app/src/main/res/xml/root_preferences.xml" value="0.19293478260869565" />
         <entry key="..\:/Users/Elisha Azaria/Programming/Android/AdvancedActivityChooser/app/src/main/res/xml/ui_preferences.xml" value="0.19293478260869565" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1975" />
+        <entry key="app/src/main/res/drawable/ic_app_registration.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_color_lens.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher.xml" value="0.152" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.209" />
@@ -33,8 +36,10 @@
         <entry key="app/src/main/res/layout/window_open_as.xml" value="0.2015625" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="app/src/main/res/xml/alias_preferences.xml" value="0.33" />
         <entry key="app/src/main/res/xml/data_extraction_rules.xml" value="0.5357142857142857" />
         <entry key="app/src/main/res/xml/full_backup_content.xml" value="0.1" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.1" />
         <entry key="app/src/main/res/xml/ui_preferences.xml" value="0.2" />
       </map>
     </option>

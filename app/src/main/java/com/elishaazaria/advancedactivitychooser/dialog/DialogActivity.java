@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,18 +28,14 @@ import com.elishaazaria.advancedactivitychooser.R;
 import com.elishaazaria.advancedactivitychooser.openas.OpenAsWindow;
 import com.elishaazaria.advancedactivitychooser.tools.MyPreferencesManager;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.yevdo.jwildcard.JWildcard;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class DialogActivity extends AppCompatActivity {
     private static final String TAG = "DialogActivity";
-    private MyPreferencesManager preferences;
     private ClipboardManager clipboard;
 
     private Intent intent;
@@ -70,8 +65,6 @@ public class DialogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dialog);
 
         setupConstants();
-
-        preferences = new MyPreferencesManager(this);
 
         setGravity();
 
@@ -146,12 +139,12 @@ public class DialogActivity extends AppCompatActivity {
     }
 
     private void createButtonsUI(List<ActivityTile> activityButtons) {
-        layoutManager = new CustomGridLayoutManager(this, preferences.getItemsPerRow());
+        layoutManager = new CustomGridLayoutManager(this, MyPreferencesManager.getItemsPerRow_UI());
         layoutManager.setScrollEnabled(false);
 
         recyclerView.setLayoutManager(layoutManager);
 
-        int size = width / preferences.getItemsPerRow();
+        int size = width / MyPreferencesManager.getItemsPerRow_UI();
 
         ActivitiesAdapter adapter = new ActivitiesAdapter(this, size, activityButtons.toArray(new ActivityTile[]{}));
         recyclerView.setAdapter(adapter);
@@ -160,7 +153,7 @@ public class DialogActivity extends AppCompatActivity {
 
     private void setUpBottomSheet() {
         BottomSheetBehavior<ConstraintLayout> bottomSheetBehavior = BottomSheetBehavior.from(constraintLayout);
-        bottomSheetBehavior.setPeekHeight((int) (height * (preferences.getWindowAreaPercent() / 100.0)));
+        bottomSheetBehavior.setPeekHeight((int) (height * (MyPreferencesManager.getWindowAreaPercent_UI() / 100.0)));
 
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -183,7 +176,7 @@ public class DialogActivity extends AppCompatActivity {
     }
 
     private void setUpUI() {
-        String title = preferences.getTitle();
+        String title = MyPreferencesManager.getTitle_UI();
 
         if (title.trim().isEmpty()) {
             titleText.setVisibility(View.GONE);
@@ -193,10 +186,10 @@ public class DialogActivity extends AppCompatActivity {
             titleText.setText(title);
         }
 
-        setUpDataText(intentScheme, preferences.isShowIntentScheme(), base.getScheme(), R.string.dialog_scheme_name);
-        setUpDataText(intentType, preferences.isShowIntentType(), base.getType(), R.string.dialog_mime_type_name);
-        setUpDataText(intentData, preferences.isShowIntentData(), base.getData() == null ? null : base.getData().toString(), R.string.dialog_data_name);
-        setUpDataText(intentAction, preferences.isShowIntentAction(), base.getAction(), R.string.dialog_action_name);
+        setUpDataText(intentScheme, MyPreferencesManager.isShowIntentScheme_UI(), base.getScheme(), R.string.dialog_scheme_name);
+        setUpDataText(intentType, MyPreferencesManager.isShowIntentType_UI(), base.getType(), R.string.dialog_mime_type_name);
+        setUpDataText(intentData, MyPreferencesManager.isShowIntentDataUI(), base.getData() == null ? null : base.getData().toString(), R.string.dialog_data_name);
+        setUpDataText(intentAction, MyPreferencesManager.isShowIntentAction_UI(), base.getAction(), R.string.dialog_action_name);
     }
 
     private void setUpDataText(TextView textView, boolean showPref, String data, int nameRes) {
@@ -228,6 +221,8 @@ public class DialogActivity extends AppCompatActivity {
         PackageManager pm = getPackageManager();
         List<ResolveInfo> resolveInfoList = pm.queryIntentActivities(base, PackageManager.MATCH_ALL | PackageManager.GET_RESOLVED_FILTER);
 //        List<ResolveInfo> resolveInfoList = pm.queryIntentActivityOptions(this.getComponentName(), intentList.toArray(intentList.toArray(new Intent[0])), base, PackageManager.MATCH_ALL); //pm.queryIntentActivities(base, PackageManager.MATCH_ALL); // PackageManager.GET_RESOLVED_FILTER |
+
+        boolean filterIntents = MyPreferencesManager.isFilterIntents_Filter();
         if (!resolveInfoList.isEmpty()) {
             for (ResolveInfo info : resolveInfoList) {
 //                Log.d("DialogActivity", info.filter.typesIterator().next());
@@ -238,7 +233,7 @@ public class DialogActivity extends AppCompatActivity {
                     filter = true;
                 }
 
-                if (preferences.isFilterIntents())
+                if (filterIntents)
                     for (String pattern : getFilterPatterns(base.getType())) {
                         if (JWildcard.matches(pattern, info.activityInfo.packageName)) {
                             filter = true;
@@ -264,11 +259,7 @@ public class DialogActivity extends AppCompatActivity {
     }
 
     private List<String> getFilterPatterns(String mimeType) {
-        String storedHashMapString = PreferenceManager.getDefaultSharedPreferences(this)
-                .getString(getString(R.string.k_filter_map_m), "{}");
-        java.lang.reflect.Type type = new TypeToken<HashMap<String, List<String>>>() {
-        }.getType();
-        HashMap<String, List<String>> filterMap = new Gson().fromJson(storedHashMapString, type);
+        HashMap<String, List<String>> filterMap = MyPreferencesManager.getFilterMap_Filter();
 
         List<String> patternList = new ArrayList<>();
 

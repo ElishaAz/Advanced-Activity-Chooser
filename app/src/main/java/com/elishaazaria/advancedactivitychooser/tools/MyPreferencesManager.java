@@ -5,74 +5,75 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
 
+import com.elishaazaria.advancedactivitychooser.MyApplication;
 import com.elishaazaria.advancedactivitychooser.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class MyPreferencesManager {
-    private int windowAreaPercent;
-    private int itemsPerRow;
+    private static SharedPreferences sharedPreferences;
+    private static MyApplication context;
 
-    private boolean filterIntents;
-
-    private boolean showIntentScheme;
-    private boolean showIntentType;
-    private boolean showIntentData;
-    private boolean showIntentAction;
-
-    private String title;
-
-    private final SharedPreferences sharedPreferences;
-    private final Context context;
-
-    public MyPreferencesManager(Context context) {
+    public static void init(MyApplication context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        this.context = context;
-
-        reloadPreferences();
+        MyPreferencesManager.context = context;
     }
 
-    public void reloadPreferences() {
-        windowAreaPercent = sharedPreferences.getInt(context.getString(R.string.k_dialog_area_i), 40);
-        itemsPerRow = sharedPreferences.getInt(context.getString(R.string.k_dialog_columns_i), 4);
+    public static void end() {
 
-        filterIntents = sharedPreferences.getBoolean(context.getString(R.string.k_filter_enable_b), false);
-
-        showIntentScheme = sharedPreferences.getBoolean(context.getString(R.string.k_dialog_show_scheme_b), false);
-        showIntentType = sharedPreferences.getBoolean(context.getString(R.string.k_dialog_show_type_b), true);
-        showIntentData = sharedPreferences.getBoolean(context.getString(R.string.k_dialog_show_data_b), false);
-        showIntentAction = sharedPreferences.getBoolean(context.getString(R.string.k_dialog_show_action_b), false);
-
-        title = sharedPreferences.getString(context.getString(R.string.k_dialog_title_s), "default");
     }
 
-    public int getWindowAreaPercent() {
-        return windowAreaPercent;
+    /* *********************** UI ******************************/
+
+    public static int getWindowAreaPercent_UI() {
+        return sharedPreferences.getInt(context.getString(R.string.k_dialog_area_i), 40);
     }
 
-    public int getItemsPerRow() {
-        return itemsPerRow;
+    public static int getItemsPerRow_UI() {
+        return sharedPreferences.getInt(context.getString(R.string.k_dialog_columns_i), 4);
     }
 
-    public boolean isFilterIntents() {
-        return filterIntents;
+    public static boolean isShowIntentScheme_UI() {
+        return sharedPreferences.getBoolean(context.getString(R.string.k_dialog_show_scheme_b), false);
     }
 
-    public boolean isShowIntentScheme() {
-        return showIntentScheme;
+    public static boolean isShowIntentType_UI() {
+        return sharedPreferences.getBoolean(context.getString(R.string.k_dialog_show_type_b), true);
     }
 
-    public boolean isShowIntentType() {
-        return showIntentType;
+    public static boolean isShowIntentDataUI() {
+        return sharedPreferences.getBoolean(context.getString(R.string.k_dialog_show_data_b), false);
     }
 
-    public boolean isShowIntentData() {
-        return showIntentData;
+    public static boolean isShowIntentAction_UI() {
+        return sharedPreferences.getBoolean(context.getString(R.string.k_dialog_show_action_b), false);
     }
 
-    public boolean isShowIntentAction() {
-        return showIntentAction;
+    public static String getTitle_UI() {
+        return sharedPreferences.getString(context.getString(R.string.k_dialog_title_s), "default");
     }
 
-    public String getTitle() {
-        return title;
+    /* *********************** filters ************************************/
+
+    public static boolean isFilterIntents_Filter() {
+//        return sharedPreferences.getBoolean(context.getString(R.string.k_filter_enable_b), false);
+        return false;
     }
+
+    public static HashMap<String, List<String>> getFilterMap_Filter() {
+        String storedHashMapString = sharedPreferences.getString(context.getString(R.string.k_filter_map_m), "{}");
+        java.lang.reflect.Type type = new TypeToken<HashMap<String, List<String>>>() {
+        }.getType();
+        return new Gson().fromJson(storedHashMapString, type);
+    }
+
+    /* ******************** Aliases ***********************************/
+
+    public static boolean isShowAdvanced_Alias() {
+        return sharedPreferences.getBoolean(context.getString(R.string.k_alias_show_advanced_b), false);
+    }
+
 }

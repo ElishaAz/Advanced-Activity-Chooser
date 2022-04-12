@@ -7,7 +7,7 @@
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
 
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!-- Settings -->
     <string name="title_settings_ui">UI Settings</string>
     <string name="main_dialog_header">Main Dialog</string>
     <string name="dialog_title_pref_name">Dialog Title</string>
@@ -21,8 +21,37 @@
     <string name="ac_title">Open Using</string>
     <string name="ac_open_as">Open As</string>
 
-    <string name="dialog_scheme_name" translatable="false">Intent Scheme</string>
-    <string name="dialog_mime_type_name" translatable="false">MIME Type</string>
-    <string name="dialog_data_name" translatable="false">Intent Data</string>
-    <string name="dialog_action_name" translatable="false">Intent Action</string>
+    <!-- Settings: UI -->
+    <string name="dialog_scheme_name">Intent Scheme</string>
+    <string name="dialog_mime_type_name">MIME Type</string>
+    <string name="dialog_data_name">Intent Data</string>
+    <string name="dialog_action_name">Intent Action</string>
+
+
+    <!-- Aliases -->
+    <string name="alias_label_files">AAC: Files</string>
+    <string name="alias_label_web_browser">AAC: Web Browser</string>
+    <string name="alias_label_web_links">AAC: Web Links</string>
+    <string name="alias_label_scheme_intents">AAC: Scheme Intents</string>
+    <string name="alias_label_open_camera">AAC: Open Camera</string>
+
+    <!-- Settings: Aliases -->
+    <string name="title_settings_alias">Alias Settings</string>
+
+    <string name="settings_alias_title">Enable registration for types of intents</string>
+    <string name="settings_alias_show_advanced">Show advanced info on this page</string>
+    <string name="settings_alias_advanced_title">Advanced</string>
+
+    <string name="settings_alias_files">File intents</string>
+    <string name="settings_alias_files_summery">Opening files.;\nScheme: file, content. MIME type: *. Action: VIEW.</string>
+    <string name="settings_alias_web_browser">Web browser</string>
+    <string name="settings_alias_web_browser_summery">Register as a web browser app.;\nScheme: http, https. Action: VIEW.</string>
+    <string name="settings_alias_web_links">Direct web links</string>
+    <string name="settings_alias_web_links_summery">Registers as a deep link for every address (not recommended).;Scheme: http, https. Host: *. Action: VIEW.</string>
+    <string name="settings_alias_scheme_intents">Other scheme intents</string>
+    <string name="settings_alias_scheme_intents_summery">A list of known scheme intents.;\nScheme: internet,
+        streaming, voice and video calling, instant messaging, sqlite, app store (various). MIME type: *. Action: VIEW.</string>
+    <string name="settings_alias_open_camera">Opening camera</string>
+    <string name="settings_alias_open_camera_summery">Open camera intents (e.g. the double press power button shortcut).;\nAction: IMAGE_CAPTURE{_SECURE}, STILL_IMAGE_CAMERA{_SECURE}, VIDEO_CAMERA, VIDEO_CAPTURE.</string>
+
 </resources>

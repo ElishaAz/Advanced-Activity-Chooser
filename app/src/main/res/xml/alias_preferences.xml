@@ -1,0 +1,19 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        android:key="@string/k_alias_category_n"
+        android:persistent="false"
+        android:title="@string/settings_alias_title">
+
+        <Preference
+            android:key="@string/k_none"
+            android:persistent="false"
+            android:selectable="false"
+            android:summary="Here you can Enable / Disable parts of the intent catcher.\nIf you disable something, it won't show up as an option in the system activity chooser." />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings_alias_advanced_title">
+        <SwitchPreference
+            android:key="@string/k_alias_show_advanced_b"
+            android:title="@string/settings_alias_show_advanced" />
+    </PreferenceCategory>
+</PreferenceScreen>

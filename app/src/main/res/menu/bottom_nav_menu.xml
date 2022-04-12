@@ -7,6 +7,11 @@
         android:title="@string/title_home" />
 
     <item
+        android:id="@+id/navigation_settings_alias"
+        android:icon="@drawable/ic_app_registration"
+        android:title="@string/title_settings_ui" />
+
+    <item
         android:id="@+id/navigation_settings_ui"
         android:icon="@drawable/ic_color_lens"
         android:title="@string/title_settings_ui" />

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.elishaazaria.advancedactivitychooser">
 
     <permission android:name="android.permission.QUERY_ALL_PACKAGES" />
@@ -18,6 +19,7 @@
 
     <!-- TODO: set up backup -->
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/full_backup_content"
@@ -36,8 +38,9 @@
             android:theme="@style/Theme.AdvancedActivityChooser.Dialog" />
 
         <activity-alias
-            android:name="files"
+            android:name=".dialog.AliasFiles"
             android:exported="true"
+            android:label="@string/alias_label_files"
             android:targetActivity=".dialog.DialogActivity">
 
             <!-- Files -->
@@ -65,8 +68,9 @@
         </activity-alias>
 
         <activity-alias
-            android:name="web_browser"
+            android:name=".dialog.AliasWebBrowser"
             android:exported="true"
+            android:label="@string/alias_label_web_browser"
             android:targetActivity=".dialog.DialogActivity">
 
             <!-- Links -->
@@ -97,9 +101,10 @@
         </activity-alias>
 
         <activity-alias
-            android:name="web_links"
+            android:name=".dialog.AliasWebLinks"
             android:enabled="false"
             android:exported="true"
+            android:label="@string/alias_label_web_links"
             android:targetActivity=".dialog.DialogActivity">
 
             <intent-filter> <!-- Direct links -->
@@ -116,6 +121,115 @@
                     android:host="*"
                     android:pathPattern=".*"
                     android:scheme="http" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name=".dialog.AliasSchemeIntents"
+            android:exported="true"
+            android:label="@string/alias_label_scheme_intents"
+            android:targetActivity=".dialog.DialogActivity">
+            <!-- No MIME type (null) -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!--                <data android:scheme="http" />-->
+                <!--                <data android:scheme="https" />-->
+                <data android:scheme="about" />
+                <data android:scheme="javascript" />
+                <data android:scheme="mailto" />
+                <data android:scheme="geo" />
+                <!--                <data android:scheme="file" />-->
+
+                <data android:scheme="rtsp" />
+                <data android:scheme="rtmp" />
+                <data android:scheme="ftp" />
+                <data android:scheme="sftp" />
+
+                <data android:scheme="skype" />
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+                <data android:scheme="mms" />
+                <data android:scheme="mmsto" />
+                <data android:scheme="spotify" />
+                <data android:scheme="tel" />
+                <data android:scheme="voicemail" />
+                <data android:scheme="view-source" />
+
+                <data android:scheme="sqlite" />
+
+                <data android:scheme="market" />
+                <data android:scheme="store" />
+                <data android:scheme="android" />
+            </intent-filter>
+            <!-- Any MIME type -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!--                <data android:scheme="http" />-->
+                <!--                <data android:scheme="https" />-->
+                <data android:scheme="about" />
+                <data android:scheme="javascript" />
+                <data android:scheme="mailto" />
+                <data android:scheme="geo" />
+                <!--                <data android:scheme="file" />-->
+
+                <data android:scheme="rtsp" />
+                <data android:scheme="rtmp" />
+                <data android:scheme="ftp" />
+                <data android:scheme="sftp" />
+
+                <data android:scheme="skype" />
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+                <data android:scheme="mms" />
+                <data android:scheme="mmsto" />
+                <data android:scheme="spotify" />
+                <data android:scheme="tel" />
+                <data android:scheme="voicemail" />
+                <data android:scheme="view-source" />
+                <data android:scheme="sqlite" />
+
+                <data android:scheme="market" />
+                <data android:scheme="store" />
+                <data android:scheme="android" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name=".dialog.AliasOpenCamera"
+            android:exported="true"
+            android:label="@string/alias_label_open_camera"
+            android:targetActivity=".dialog.DialogActivity">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.media.action.IMAGE_CAPTURE" />
+                <action android:name="android.media.action.IMAGE_CAPTURE_SECURE" />
+                <action android:name="android.media.action.STILL_IMAGE_CAMERA" />
+                <action android:name="android.media.action.STILL_IMAGE_CAMERA_SECURE" />
+                <action android:name="android.media.action.VIDEO_CAMERA" />
+                <action android:name="android.media.action.VIDEO_CAPTURE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity-alias>
 
