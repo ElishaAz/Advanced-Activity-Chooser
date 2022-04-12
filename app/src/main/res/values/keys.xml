@@ -25,6 +25,7 @@
 
     <string name="k_alias_category_n" translatable="false">n_alias_category</string>
     <string name="k_alias_show_advanced_b" translatable="false">b_alias_show_advanced</string>
+    <string name="k_alias_enable_editing_b" translatable="false">b_alias_enable_editing</string>
 
     <string name="k_alias_files_b" translatable="false">b_alias_files</string>
     <string name="k_alias_web_browser_b" translatable="false">b_alias_web_browser</string>

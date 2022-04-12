@@ -3,14 +3,14 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk COMPILE_SDK_VERSION
 
     defaultConfig {
         applicationId "com.elishaazaria.advancedactivitychooser"
-        minSdk 24
-        targetSdk 32
-        versionCode 2
-        versionName "v1.0.0"
+        minSdk MIN_SDK_VERSION
+        targetSdk TARGET_SDK_VERSION
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

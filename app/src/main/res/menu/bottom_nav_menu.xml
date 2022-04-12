@@ -9,7 +9,7 @@
     <item
         android:id="@+id/navigation_settings_alias"
         android:icon="@drawable/ic_app_registration"
-        android:title="@string/title_settings_ui" />
+        android:title="@string/title_settings_alias" />
 
     <item
         android:id="@+id/navigation_settings_ui"

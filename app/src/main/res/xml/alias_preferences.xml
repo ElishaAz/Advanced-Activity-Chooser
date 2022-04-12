@@ -9,7 +9,19 @@
             android:key="@string/k_none"
             android:persistent="false"
             android:selectable="false"
-            android:summary="Here you can Enable / Disable parts of the intent catcher.\nIf you disable something, it won't show up as an option in the system activity chooser." />
+            android:summary="@string/settings_alias_info" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:persistent="false"
+            android:key="@string/k_alias_enable_editing_b"
+            android:summary="@string/settings_alias_enable_editing_summery"
+            android:title="@string/settings_alias_enable_editing" />
+<!--        <Preference-->
+<!--            android:key="@string/k_none"-->
+<!--            android:persistent="false"-->
+<!--            android:selectable="false" />-->
+
+
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/settings_alias_advanced_title">
         <SwitchPreference

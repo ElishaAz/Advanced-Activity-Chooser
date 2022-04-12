@@ -33,6 +33,8 @@ public class SettingsAlias extends PreferenceFragmentCompat {
             switchPreference.setSummary(formatAliasSummery(context, alias.summery, MyPreferencesManager.isShowAdvanced_Alias()));
             switchPreference.setDefaultValue(alias.defaultEnabled);
 
+            switchPreference.setSelectable(false);
+
             switchPreference.setOnPreferenceChangeListener((preference, newValue) -> {
                 AliasesManager.updateAlias(context, alias, (Boolean) newValue);
                 return true;
@@ -42,10 +44,19 @@ public class SettingsAlias extends PreferenceFragmentCompat {
         }
 
         findPreference(getString(R.string.k_alias_show_advanced_b)).setOnPreferenceChangeListener((preference, newValue) -> {
+            boolean val = (Boolean) newValue;
             for (Aliases alias : Aliases.values()) {
-                findPreference(getString(alias.key)).setSummary(formatAliasSummery(context, alias.summery, (Boolean) newValue));
+                findPreference(getString(alias.key)).setSummary(formatAliasSummery(context, alias.summery, val));
             }
 
+            return true;
+        });
+
+        findPreference(getString(R.string.k_alias_enable_editing_b)).setOnPreferenceChangeListener((preference, newValue) -> {
+            boolean val = (Boolean) newValue;
+            for (Aliases alias : Aliases.values()) {
+                findPreference(getString(alias.key)).setSelectable(val);
+            }
             return true;
         });
     }
