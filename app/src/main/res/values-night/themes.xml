@@ -15,6 +15,15 @@
     </style>
 
     <style name="Theme.AdvancedActivityChooser.Dialog" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
