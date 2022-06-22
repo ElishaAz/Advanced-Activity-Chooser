@@ -12,6 +12,7 @@ public class ActivityTile {
     public final CharSequence label;
     public final Drawable icon;
     public final ResolveInfo info;
+    public final ComponentName component;
 
     OnClickListener onClick;
     OnLongClickListener onLongClick;
@@ -20,12 +21,12 @@ public class ActivityTile {
         this.label = label;
         this.icon = icon;
         this.info = info;
+        ActivityInfo activity = info.activityInfo;
+        component = new ComponentName(activity.applicationInfo.packageName, activity.name);
     }
 
     public Intent assignIntent(Intent source) {
-        ActivityInfo activity = info.activityInfo;
-        ComponentName name = new ComponentName(activity.applicationInfo.packageName, activity.name);
-        source.setComponent(name);
+        source.setComponent(component);
         return source;
     }
 

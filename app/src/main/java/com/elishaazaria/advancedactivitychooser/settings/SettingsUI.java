@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.text.InputType;
 
 import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SeekBarPreference;
 
 import com.elishaazaria.advancedactivitychooser.R;
+import com.elishaazaria.advancedactivitychooser.dialog.activitycomparators.Comparators;
+
+import java.util.Arrays;
 
 public class SettingsUI extends PreferenceFragmentCompat {
 
@@ -23,6 +27,22 @@ public class SettingsUI extends PreferenceFragmentCompat {
 //        });
 
         SeekBarPreference area = findPreference(getString(R.string.k_dialog_area_i));
+        assert area != null;
         area.setSeekBarIncrement(10);
+
+        ListPreference sortComparator = findPreference(getString(R.string.k_sort_comparator_e_comparators));
+        assert sortComparator != null;
+
+        Comparators[] values = Comparators.values();
+        String[] entries = new String[values.length];
+        String[] entryValues = new String[values.length];
+        for (int i = 0; i < values.length; i++) {
+            entries[i] = getString(values[i].name);
+            entryValues[i] = values[i].name();
+        }
+
+        sortComparator.setEntries(entries);
+        sortComparator.setEntryValues(entryValues);
+        sortComparator.setDefaultValue(entryValues[0]);
     }
 }

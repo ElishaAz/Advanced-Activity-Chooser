@@ -52,10 +52,17 @@
     <string name="settings_alias_web_browser">Web browser</string>
     <string name="settings_alias_web_browser_summery">Register as a web browser app.;\nScheme: http, https. Action: VIEW.</string>
     <string name="settings_alias_web_links">Direct web links</string>
-    <string name="settings_alias_web_links_summery">Register as a deep link for every web address (not recommended).;Scheme: http, https. Host: *. Action: VIEW.</string>
+    <string name="settings_alias_web_links_summery">Register as a deep link for every web address (not recommended).;\nScheme: http, https. Host: *. Action: VIEW.</string>
     <string name="settings_alias_scheme_intents">Other scheme intents</string>
     <string name="settings_alias_scheme_intents_summery">A list of known scheme intents, including streaming, calling, IM, and app store.;\nScheme: internet,
         streaming, voice and video calling, instant messaging, sqlite, app store (various). MIME type: *. Action: VIEW.</string>
     <string name="settings_alias_open_camera">Opening camera</string>
     <string name="settings_alias_open_camera_summery">Open camera (e.g. the double press power button shortcut).;\nAction: IMAGE_CAPTURE{_SECURE}, STILL_IMAGE_CAMERA{_SECURE}, VIDEO_CAMERA, VIDEO_CAPTURE.</string>
+
+    <!-- Settings: Sort -->
+    <string name="settings_sort_category">Sorting</string>
+    <string name="settings_sort_comparator">Sort order</string>
+    <string name="settings_sort_comparator_none_name">As is</string>
+    <string name="settings_sort_comparator_recents_name">Most recent is first</string>
+    <string name="settings_sort_comparator_specific_name">Most specific is first</string>
 </resources>

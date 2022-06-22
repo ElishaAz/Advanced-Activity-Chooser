@@ -1,17 +1,23 @@
 package com.elishaazaria.advancedactivitychooser.tools;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
+import androidx.annotation.StringRes;
 import androidx.preference.PreferenceManager;
 
 import com.elishaazaria.advancedactivitychooser.MyApplication;
 import com.elishaazaria.advancedactivitychooser.R;
+import com.elishaazaria.advancedactivitychooser.dialog.activitycomparators.Comparators;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MyPreferencesManager {
     private static SharedPreferences sharedPreferences;
@@ -23,7 +29,8 @@ public class MyPreferencesManager {
     }
 
     public static void end() {
-
+        context = null;
+        sharedPreferences = null;
     }
 
     /* *********************** UI ******************************/
@@ -76,4 +83,59 @@ public class MyPreferencesManager {
         return sharedPreferences.getBoolean(context.getString(R.string.k_alias_show_advanced_b), false);
     }
 
+    /* ******************* Dialog ************************************/
+
+    public static HashMap<ComponentName, Long> getRecentMap_Dialog() {
+        String storedHashMapString = sharedPreferences.getString(context.getString(R.string.k_dialog_recent_map_m), "{}");
+        java.lang.reflect.Type type = new TypeToken<HashMap<String, Long>>() {
+        }.getType();
+        HashMap<String, Long> fromSave = new Gson().fromJson(storedHashMapString, type);
+        HashMap<ComponentName, Long> ret = new HashMap<>(fromSave.size() + 1);
+        fromSave.forEach((k, v) -> ret.put(decodeComponentName(k), v));
+        return ret;
+    }
+
+    private static ComponentName decodeComponentName(String string) {
+        String[] split = string.split(",");
+        return new ComponentName(split[0], split[1]);
+    }
+
+    public static void setRecentMap_Dialog(Map<ComponentName, Long> recentMap) {
+        HashMap<String, Long> toSave = new HashMap<>(recentMap.size());
+        recentMap.forEach((k, v) -> toSave.put(encodeComponentName(k), v));
+        String recentMapString = new Gson().toJson(toSave);
+        sharedPreferences.edit().putString(context.getString(R.string.k_dialog_recent_map_m), recentMapString).apply();
+    }
+
+    private static String encodeComponentName(ComponentName componentName) {
+        return componentName.getPackageName() + ',' + componentName.getClassName();
+    }
+
+    public static void addToRecentMap_Dialog(ComponentName componentName, Long l) {
+        String storedHashMapString = sharedPreferences.getString(context.getString(R.string.k_dialog_recent_map_m), "{}");
+        java.lang.reflect.Type type = new TypeToken<HashMap<String, Long>>() {
+        }.getType();
+        HashMap<String, Long> map = new Gson().fromJson(storedHashMapString, type);
+        map.put(encodeComponentName(componentName),l);
+        String recentMapString = new Gson().toJson(map);
+        sharedPreferences.edit().putString(context.getString(R.string.k_dialog_recent_map_m), recentMapString).apply();
+    }
+
+    public static Comparators getSelectedComparator_Dialog() {
+        String comparator = sharedPreferences.getString(context.getString(R.string.k_sort_comparator_e_comparators), null);
+        if (comparator != null) {
+            try {
+                return Comparators.valueOf(comparator);
+            } catch (IllegalArgumentException ignored) {
+            }
+        }
+
+        return Comparators.values()[0];
+    }
+
+    /* ******************************* Debug **************************************/
+
+    public static void deleteFromSharedPreferences_Debug(@StringRes int pref) {
+        sharedPreferences.edit().remove(context.getString(pref)).commit();
+    }
 }

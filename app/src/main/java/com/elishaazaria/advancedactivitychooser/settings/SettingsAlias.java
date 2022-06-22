@@ -9,8 +9,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
 
 import com.elishaazaria.advancedactivitychooser.R;
-import com.elishaazaria.advancedactivitychooser.tools.Aliases;
-import com.elishaazaria.advancedactivitychooser.tools.AliasesManager;
+import com.elishaazaria.advancedactivitychooser.aliases.Aliases;
+import com.elishaazaria.advancedactivitychooser.aliases.AliasesManager;
 import com.elishaazaria.advancedactivitychooser.tools.MyPreferencesManager;
 
 public class SettingsAlias extends PreferenceFragmentCompat {

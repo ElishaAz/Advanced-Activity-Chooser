@@ -7,6 +7,7 @@
     d - double
     s - string
     m - a HashMap serialized as JSON
+    e_<type> - enum of type type
     -->
 
     <string name="k_none" translatable="false">pref_static_field_key</string>
@@ -19,6 +20,7 @@
     <string name="k_dialog_show_action_b" translatable="false">b_dialog_show_action</string>
     <string name="k_dialog_area_i" translatable="false">i_dialog_area</string>
     <string name="k_dialog_title_s" translatable="false">s_dialog_title</string>
+    <string name="k_dialog_recent_map_m" translatable="false">m_recent_map</string>
 
     <string name="k_filter_enable_b" translatable="false">b_filter_enable</string>
     <string name="k_filter_map_m" translatable="false">m_filter_map</string>
@@ -32,4 +34,6 @@
     <string name="k_alias_web_links_b" translatable="false">b_alias_web_links</string>
     <string name="k_alias_scheme_intents_b" translatable="false">b_alias_scheme_intents</string>
     <string name="k_alias_open_camera_b" translatable="false">b_alias_open_camera</string>
+
+    <string name="k_sort_comparator_e_comparators" translatable="false">b_sort_comparator</string>
 </resources>

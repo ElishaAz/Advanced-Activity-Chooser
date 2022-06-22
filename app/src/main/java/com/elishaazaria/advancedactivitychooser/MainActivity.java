@@ -2,7 +2,8 @@ package com.elishaazaria.advancedactivitychooser;
 
 import android.os.Bundle;
 
-import com.elishaazaria.advancedactivitychooser.tools.AliasesManager;
+import com.elishaazaria.advancedactivitychooser.aliases.AliasesManager;
+import com.elishaazaria.advancedactivitychooser.tools.MyPreferencesManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;

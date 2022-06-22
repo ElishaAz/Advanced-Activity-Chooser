@@ -1,4 +1,4 @@
-package com.elishaazaria.advancedactivitychooser.tools;
+package com.elishaazaria.advancedactivitychooser.aliases;
 
 import androidx.annotation.StringRes;
 

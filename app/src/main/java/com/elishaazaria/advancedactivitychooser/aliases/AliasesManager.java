@@ -1,4 +1,4 @@
-package com.elishaazaria.advancedactivitychooser.tools;
+package com.elishaazaria.advancedactivitychooser.aliases;
 
 import android.content.ComponentName;
 import android.content.Context;

@@ -48,4 +48,10 @@
             app:showSeekBarValue="true"
             app:title="@string/dialog_area_name" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings_sort_category">
+        <ListPreference
+            android:key="@string/k_sort_comparator_e_comparators"
+            android:title="@string/settings_sort_comparator"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
 </PreferenceScreen>

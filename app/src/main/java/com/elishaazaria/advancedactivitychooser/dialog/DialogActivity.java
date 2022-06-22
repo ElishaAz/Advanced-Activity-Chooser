@@ -25,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.elishaazaria.advancedactivitychooser.R;
+import com.elishaazaria.advancedactivitychooser.dialog.activitycomparators.RecentComparator;
+import com.elishaazaria.advancedactivitychooser.dialog.activitycomparators.SpecificIntentComparator;
 import com.elishaazaria.advancedactivitychooser.openas.OpenAsWindow;
 import com.elishaazaria.advancedactivitychooser.tools.MyPreferencesManager;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -252,8 +254,16 @@ public class DialogActivity extends AppCompatActivity {
         } else {
             Log.d("DialogActivity", "List is empty!");
         }
-
-        activityButtons.sort(new ActivitiesComparator(base.getType()));
+        switch (MyPreferencesManager.getSelectedComparator_Dialog()) {
+            case NONE:
+                break;
+            case RECENT:
+                activityButtons.sort(new RecentComparator());
+                break;
+            case SPECIFIC_INTENT:
+                activityButtons.sort(new SpecificIntentComparator(base.getType()));
+                break;
+        }
 
         return activityButtons;
     }
@@ -293,6 +303,9 @@ public class DialogActivity extends AppCompatActivity {
     public void onClick(ActivityTile ab) {
         base = ab.assignIntent(base);
         startActivity(base);
+
+        MyPreferencesManager.addToRecentMap_Dialog(ab.component, System.currentTimeMillis());
+
         finishAndRemoveTask();
     }
 
